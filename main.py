@@ -66,7 +66,7 @@ def main():
                     list_of_final_full_names.append(last_name_dict[j][k])
 
             final_search_result = list(set(list_of_first_names) | set(list_of_final_full_names))
-            final_search_result.sort(key=len, reverse=False)
+            final_search_result.sort()
 
             for name in final_search_result:
                 print name
