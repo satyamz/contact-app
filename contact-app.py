@@ -24,3 +24,20 @@ class Node:
         else:
             self.nodes[prefix_letter].__add_contact__(contact, string_postion + 1)
         return True
+
+    def search_contact(self, prefix, string_postion):
+        """
+        Return contacts based on prefix
+        """
+        contact_list = list()
+        for key, node in self.nodes.iteritems():
+            if(key == prefix[string_postion] or string_postion >= len(prefix)):
+                if (node.contact is not None):
+                    contact_list.append(node.contact)
+            if (node.nodes != {}):
+                if (string_postion + 1 <= len(prefix)):
+                    contact_list += node.search_contact(prefix, string_postion+1)
+                else:
+                    contact_list += node.search_contact(prefix, string_postion)
+
+        return contact_list
