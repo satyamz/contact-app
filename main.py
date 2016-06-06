@@ -24,10 +24,13 @@ def main():
 
     last_name_dict = defaultdict(list)
     last_name_list = []
-    list_of_final_names = []
 
 
     while True:
+        list_of_first_names = []
+        list_of_final_full_names = []
+        final_search_result = []
+
         try:
             option = input("1. Add Contact\t2. Search Contact\t3.Exit\n")
         except:
@@ -48,24 +51,26 @@ def main():
                 options_for_last_name[option](last_name)
 
         elif option == 2:
-            list_of_final_names = []
+            list_of_final_full_names = []
             search_string = raw_input("Enter name: ").strip()
             matched_full_name = options_for_full_name[option](search_string)
             matched_last_name = options_for_last_name[option](search_string)
             matched_full_name.sort(key=len, reverse=False) # Ranking contact name
-            matched_last_name.sort(key=len, reverse=False) # Ranking contacts
 
             for i in matched_full_name:
                 if (len(search_string) <= len(i)):
-                    print i
+                    list_of_first_names.append(i)
 
-            # print matched_last_name
             for j in matched_last_name:
-                for k in range(len(matched_last_name)+1):
-                    list_of_final_names.append(last_name_dict[j][k])
+                for k in range(0, len(last_name_dict[j])):
+                    list_of_final_full_names.append(last_name_dict[j][k])
 
-            for name in list_of_final_names:
+            final_search_result = list(set(list_of_first_names) | set(list_of_final_full_names))
+            final_search_result.sort(key=len, reverse=False)
+
+            for name in final_search_result:
                 print name
+
         else:
             print "Invalid option"
 
