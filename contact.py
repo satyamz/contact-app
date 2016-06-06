@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
-implementation of contact application.
-for implementation of contact application trie data structure is used.
+Implementation of contact application.
+For implementation of contact application trie data structure is used.
 """
 
 
