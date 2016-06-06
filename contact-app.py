@@ -25,7 +25,7 @@ class Node:
             self.nodes[prefix_letter].__add_contact__(contact, string_postion + 1)
         return True
 
-    def search_contact(self, prefix, string_postion):
+    def __search_contact__(self, prefix, string_postion):
         """
         Return contacts based on prefix
         """
@@ -36,8 +36,23 @@ class Node:
                     contact_list.append(node.contact)
             if (node.nodes != {}):
                 if (string_postion + 1 <= len(prefix)):
-                    contact_list += node.search_contact(prefix, string_postion+1)
+                    contact_list += node.__search_contact__(prefix, string_postion+1)
                 else:
-                    contact_list += node.search_contact(prefix, string_postion)
+                    contact_list += node.__search_contact__(prefix, string_postion)
 
         return contact_list
+
+class Trie:
+    """ Trie class to organize nodes """
+    def __init__(self):
+        self.root = Node()
+    def add_contact(self, contact, string_postion=0):
+        return self.root.__add_contact__(contact, string_postion)
+    def search_contact(self, prefix, string_postion=0):
+        return self.root.__search_contact__(prefix, string_postion)
+contact_app = Trie()
+contact_app.add_contact("Satyam Zode", string_postion=0)
+contact_app.add_contact("Gunjan", string_postion=0)
+contact_app.add_contact("Anuja Rane", string_postion=0)
+contact_app.add_contact("Pratibha", string_postion=0)
+print "Added successfully", contact_app.root.nodes
